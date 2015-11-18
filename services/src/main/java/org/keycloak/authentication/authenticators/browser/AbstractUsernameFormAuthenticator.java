@@ -153,7 +153,7 @@ public abstract class AbstractUsernameFormAuthenticator extends AbstractFormAuth
             return false;
         }
         credentials.add(UserCredentialModel.password(password));
-        boolean valid = context.getSession().users().validCredentials(context.getRealm(), user, credentials);
+        boolean valid = context.getSession().users().validCredentials(context.getSession(), context.getRealm(), user, credentials);
         if (!valid) {
             invalidPassword(context, user);
             return false;
