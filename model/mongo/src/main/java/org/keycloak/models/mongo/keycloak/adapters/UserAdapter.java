@@ -331,7 +331,7 @@ public class UserAdapter extends AbstractMongoAdapter<MongoUserEntity> implement
     private void setValue(CredentialEntity credentialEntity, UserCredentialModel cred) {
         byte[] salt = getSalt();
         int hashIterations = 1;
-        PasswordHashProvider provider = session.getProvider(PasswordHashProvider.class);
+        PasswordHashProvider provider = session.getProvider(PasswordHashProvider.class, "sha");
         PasswordPolicy policy = realm.getPasswordPolicy();
         if (policy != null) {
             hashIterations = policy.getHashIterations();
@@ -342,6 +342,7 @@ public class UserAdapter extends AbstractMongoAdapter<MongoUserEntity> implement
         credentialEntity.setValue(provider.encode(cred.getValue(), salt));
         credentialEntity.setSalt(salt);
         credentialEntity.setHashIterations(hashIterations);
+        credentialEntity.setAlgorithm("sha");
     }
 
     private CredentialEntity getCredentialEntity(MongoUserEntity userEntity, String credType) {

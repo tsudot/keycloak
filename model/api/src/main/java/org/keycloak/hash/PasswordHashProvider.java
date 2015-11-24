@@ -11,4 +11,6 @@ public interface PasswordHashProvider extends Provider {
 
     boolean verify(String rawPassword, String encodedPassword, byte[] salt);
 
+    String getAlgorithm();
+
 }

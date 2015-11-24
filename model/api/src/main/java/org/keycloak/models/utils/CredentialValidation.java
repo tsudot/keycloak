@@ -64,7 +64,7 @@ public class CredentialValidation {
 
         byte[] salt = getSalt();
 
-        PasswordHashProvider provider = session.getProvider(PasswordHashProvider.class, "default");
+        PasswordHashProvider provider = session.getProvider(PasswordHashProvider.class, algorithm);
 
         byte[] credSalt = credential.getSalt();
 
@@ -78,6 +78,7 @@ public class CredentialValidation {
                 newCred.setSalt(credential.getSalt());
                 newCred.setHashIterations(iterations);
                 newCred.setValue(provider.encode(unhashedCredValue, salt));
+                newCred.setAlgorithm(algorithm);
                 user.updateCredentialDirectly(newCred);
             }
 
