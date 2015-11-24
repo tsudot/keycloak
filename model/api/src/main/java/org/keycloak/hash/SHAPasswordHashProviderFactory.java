@@ -9,16 +9,17 @@ import org.keycloak.models.KeycloakSessionFactory;
  */
 public class SHAPasswordHashProviderFactory implements PasswordHashProviderFactory {
 
-    private int strength;
+    // private int strength;
 
     @Override
     public PasswordHashProvider create(KeycloakSession session) {  
+        int strength = 1;
         return new SHAPasswordHashProvider(strength);
     }
 
     @Override
     public void init(Config.Scope config) {
-        strength = config.getInt("strength");
+        // strength = config.getInt("strength");
     }
 
     @Override
