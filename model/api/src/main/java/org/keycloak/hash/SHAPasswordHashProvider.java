@@ -8,7 +8,6 @@ import org.keycloak.models.utils.SHAPasswordEncoder;
 public class SHAPasswordHashProvider implements PasswordHashProvider {
 
     private final String algorithm;
-    private final int iterations;
     private final int strength;
 
     public SHAPasswordHashProvider(int strength) {
@@ -16,12 +15,16 @@ public class SHAPasswordHashProvider implements PasswordHashProvider {
         this.strength = strength;
     }
 
-    public String encode(String rawPassword) {
+    public String encode(String rawPassword, byte[] salt) {
+        String s = new String(salt);
+        rawPassword = s.concat(rawPassword);
         SHAPasswordEncoder encoder = new SHAPasswordEncoder(strength);
         return encoder.encode(rawPassword);
     }
 
     public boolean verify(String rawPassword, String encodedPassword, byte[] salt) {
+        String s = new String(salt);
+        rawPassword = s.concat(rawPassword);
         SHAPasswordEncoder encoder = new SHAPasswordEncoder(strength);
         return encoder.verify(rawPassword, encodedPassword);
     }
