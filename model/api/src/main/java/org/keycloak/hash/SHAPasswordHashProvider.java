@@ -16,17 +16,15 @@ public class SHAPasswordHashProvider implements PasswordHashProvider {
     }
 
     public String encode(String rawPassword, byte[] salt) {
-        String s = new String(salt);
-        rawPassword = s.concat(rawPassword);
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA1"); 
         SHAPasswordEncoder encoder = new SHAPasswordEncoder(strength);
-        return encoder.encode(rawPassword);
+        return encoder.encode(rawPassword, salt);
     }
 
     public boolean verify(String rawPassword, String encodedPassword, byte[] salt) {
-        String s = new String(salt);
-        rawPassword = s.concat(rawPassword);
         SHAPasswordEncoder encoder = new SHAPasswordEncoder(strength);
-        return encoder.verify(rawPassword, encodedPassword);
+        return encoder.verify(rawPassword, encodedPassword, salt);
     }
 
     public String getAlgorithm() {
