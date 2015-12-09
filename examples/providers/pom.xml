@@ -18,5 +18,6 @@
         <module>event-store-mem</module>
         <module>federation-provider</module>
         <module>authenticator</module>
+        <module>sha1-password-hash-provider</module>
     </modules>
 </project>
