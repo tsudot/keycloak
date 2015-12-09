@@ -63,11 +63,11 @@ public class CredentialRepresentation {
         this.hashedSaltedValue = hashedSaltedValue;
     }
 
-    public String getSalt() {
+    public byte[] getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt) {
+    public void setSalt(byte[] salt) {
         this.salt = salt;
     }
 
