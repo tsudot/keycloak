@@ -144,7 +144,7 @@ public class AddUser {
         credentials.setType(credentialValueModel.getType());
         credentials.setAlgorithm(credentialValueModel.getAlgorithm());
         credentials.setHashIterations(credentialValueModel.getHashIterations());
-        credentials.setSalt(Base64.encodeBytes(credentialValueModel.getSalt()));
+        credentials.setSalt(Base64.encodeBytes(credentialValueModel.getSalt()).getBytes());
         credentials.setHashedSaltedValue(credentialValueModel.getValue());
 
         user.getCredentials().add(credentials);

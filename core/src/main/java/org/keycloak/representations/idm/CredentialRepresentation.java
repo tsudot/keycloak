@@ -21,7 +21,7 @@ public class CredentialRepresentation {
 
     // Value stored in DB (used for example during export/import)
     protected String hashedSaltedValue;
-    protected String salt;
+    protected byte[] salt;
     protected Integer hashIterations;
     protected Integer counter;
     private String algorithm;
